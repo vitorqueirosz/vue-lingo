@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div>
     <h1 class="font-bold text-3xl text-slate-600 mb-4 text-center md:text-left">
       {{ title }}
     </h1>
@@ -17,7 +17,6 @@
           v-bind="{
             name: item.name,
             class: 'text-white h-10 w-28',
-            isImage: item.isImage,
           }"
         />
       </button>
@@ -59,7 +58,7 @@
   </div>
 </template>
 <script>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import Icon from '@/components/Icon.vue';
 import { useStore } from 'vuex';
 
@@ -103,6 +102,10 @@ export default {
     const selectedWords = ref([]);
     const wordsListRef = ref(null);
     const store = useStore();
+
+    const handleCurrentAnswer = () => {
+      store.commit('updateCurrentAnswer', selectedWords.value.join(' '));
+    };
 
     let leftSpace = 0;
     const handleNewPosition = (index) => {
@@ -150,13 +153,14 @@ export default {
         word.style.transform = `translate(${formatedValueX}px, -${translate.y}px)`;
         leftSpace = leftSpace + wordValues.width + spacePlus;
       }
+
+      handleCurrentAnswer();
     };
 
-    const handleCurrentAnswer = () => {
+    const setCurrentAnswer = () => {
       store.commit('updateCorrectAnswer', props.answer);
-      store.commit('updateCurrentAnswer', selectedWords.value.join(' '));
     };
-    watch(selectedWords, handleCurrentAnswer, { deep: true });
+    setCurrentAnswer();
 
     const handleTriggerVoice = (sentence) => {
       const lang = sentence?.language || 'en';

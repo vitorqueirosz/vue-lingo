@@ -2,7 +2,7 @@
   <footer
     :class="
       `flex items-center border-t-2 border-neutral-200 h-36 w-full m-auto ` +
-        resultPayload.bgClass
+      resultPayload.bgClass
     "
   >
     <div
@@ -20,7 +20,9 @@
         </div>
       </div>
 
-      <Button v-else variant="secondary" @click="handleNextStep"> SKIP </Button>
+      <ButtonC v-else variant="secondary" @click="handleNextStep">
+        SKIP
+      </ButtonC>
       <ButtonC
         :disabled="!$store.state.currentAnswer"
         :variant="resultPayload.variant"
@@ -83,7 +85,7 @@ export default {
           title: 'Correct solution:',
           textClass: 'text-red-700',
           bgClass: 'bg-red-200',
-          description: store.state.currentAnswer,
+          description: store.state.correctAnswer,
           variant: 'error',
         };
       }

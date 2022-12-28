@@ -28,28 +28,28 @@ export const lessons = {
         },
         {
           type: 'image',
-          title: 'Qual desses é o “menino”?',
+          title: 'Qual desses é o "bombeiro"?',
           images: [
             {
               image: Icon,
-              name: 'man',
+              name: 'security',
               isImage: true,
-              title: 'the man',
+              title: 'the security man',
             },
             {
               image: Icon,
-              name: 'man',
+              name: 'cop',
               isImage: true,
-              title: 'the woman',
+              title: 'the cop',
             },
             {
               image: Icon,
-              name: 'man',
+              name: 'fireman',
               isImage: true,
-              title: 'the boy',
+              title: 'the fireman',
             },
           ],
-          answer: 'the boy',
+          answer: 'the fireman',
         },
         {
           type: 'sentence',

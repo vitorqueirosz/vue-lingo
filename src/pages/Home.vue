@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col items-center h-full mt-32">
     <h1 class="text-5xl font-bold inline-flex mb-6">
       Vue
       <h1 class="text-stone-800">lingo</h1>
@@ -7,8 +7,8 @@
 
     <div class="relative flex justify-center">
       <Card title="Choose your language">
-        <Button @click="onSelectLanguage('en')"> English </Button>
-        <Button @click="onSelectLanguage('es')"> Spanish </Button>
+        <ButtonC @click="onSelectLanguage('en')">English</ButtonC>
+        <ButtonC @click="onSelectLanguage('es')">Spanish</ButtonC>
       </Card>
 
       <Card

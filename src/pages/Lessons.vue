@@ -95,11 +95,13 @@ export default {
 
       return newSteps;
     };
-    const newSteps = randomSteps();
+    randomSteps();
 
     const handleSetNextStep = () => {
-      currentStep.value = newSteps[step.value];
-      currentComponent.value = components[currentStep.value.type];
+      currentStep.value = lessonsSteps[1];
+      currentComponent.value = components.image;
+
+      console.log(currentStep.value);
     };
     handleSetNextStep();
 
