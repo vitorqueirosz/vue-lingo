@@ -20,7 +20,12 @@
         </div>
       </div>
 
-      <ButtonC v-else variant="secondary" @click="handleNextStep">
+      <ButtonC
+        v-else
+        variant="secondary"
+        :disabled="$store.state.hasResult"
+        @click="handleNextStep"
+      >
         SKIP
       </ButtonC>
       <ButtonC

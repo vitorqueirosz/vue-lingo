@@ -39,6 +39,7 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
+  name: 'ImageC',
   components: {
     Icon,
   },

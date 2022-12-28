@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col m-auto mt-44 w-full max-w-4xl flex-1">
+    <div class="flex flex-col m-auto mt-44 w-full max-w-screen-sm flex-1">
       <component :is="Lesson" v-bind="lesson" />
     </div>
 
@@ -32,6 +32,7 @@ import { useStore } from 'vuex';
 
 import Listening from '@/components/Listening.vue';
 import ImageC from '@/components/ImageC.vue';
+import Sentence from '@/components/Sentence.vue';
 import Icon from '@/components/Icon.vue';
 import FooterC from '@/components/FooterC.vue';
 
@@ -41,7 +42,7 @@ import { PATHS } from '@/constants/path';
 const components = {
   listening: Listening,
   image: ImageC,
-  sentence: Listening,
+  sentence: Sentence,
   matchWords: Listening,
 };
 
@@ -50,6 +51,7 @@ export default {
   components: {
     Listening,
     ImageC,
+    Sentence,
     Icon,
     FooterC,
   },
@@ -95,13 +97,11 @@ export default {
 
       return newSteps;
     };
-    randomSteps();
+    const newSteps = randomSteps();
 
     const handleSetNextStep = () => {
-      currentStep.value = lessonsSteps[1];
-      currentComponent.value = components.image;
-
-      console.log(currentStep.value);
+      currentStep.value = newSteps[step.value];
+      currentComponent.value = components[currentStep.value.type];
     };
     handleSetNextStep();
 

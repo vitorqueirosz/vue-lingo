@@ -21,7 +21,8 @@ export default createStore({
       state.currentAnswer = value;
     },
     checkAnswer(state) {
-      state.isCorrectAnswer = state.correctAnswer === state.currentAnswer;
+      state.isCorrectAnswer =
+        state.correctAnswer.toLowerCase() === state.currentAnswer.toLowerCase();
       state.hasResult = true;
     },
     resetCurrentPayload(state) {

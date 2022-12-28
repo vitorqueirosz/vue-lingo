@@ -56,7 +56,7 @@ export const lessons = {
           title: 'Escreva isso em inglês',
           image: {
             image: Icon,
-            name: 'man',
+            name: 'woman',
             isImage: true,
           },
           words: ['woman', 'boy', 'I', 'A', 'man'],
