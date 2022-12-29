@@ -16,7 +16,7 @@
   </button>
 </template>
 
-<script>
+<script setup>
 import { clsx } from '@/utils/class';
 
 const variants = {
@@ -27,20 +27,11 @@ const variants = {
   error: 'bg-red-500 enabled:hover:bg-red-600 text-white border-red-600',
 };
 
-export default {
-  name: 'ButtonC',
-  props: {
-    disabled: Boolean,
-    variant: {
-      type: String,
-      default: 'primary',
-    },
+defineProps({
+  disabled: Boolean,
+  variant: {
+    type: String,
+    default: 'primary',
   },
-  setup() {
-    return {
-      clsx,
-      variants,
-    };
-  },
-};
+});
 </script>

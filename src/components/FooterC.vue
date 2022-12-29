@@ -2,7 +2,7 @@
   <footer
     :class="
       `flex items-center border-t-2 border-neutral-200 h-36 w-full m-auto ` +
-      resultPayload.bgClass
+        resultPayload.bgClass
     "
   >
     <div
@@ -39,69 +39,57 @@
   </footer>
 </template>
 
-<script>
-import ButtonC from '@/components/ButtonC.vue';
-import Icon from '@/components/Icon.vue';
+<script setup>
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
-export default {
-  components: {
-    ButtonC,
-    Icon,
+import ButtonC from '@/components/ButtonC.vue';
+import Icon from '@/components/Icon.vue';
+
+const props = defineProps({
+  handleNextStep: {
+    type: Function,
+    default: () => undefined,
   },
-  props: {
-    handleNextStep: {
-      type: Function,
-      default: () => undefined,
-    },
-  },
-  setup(props) {
-    const buttonTitle = ref('CHECK');
-    const resultPayload = ref({});
-    const store = useStore();
+});
 
-    const handleCheckAnswer = () => {
-      if (!store.state.hasResult) {
-        store.commit('checkAnswer');
-        buttonTitle.value = 'CONTINUE';
-      } else {
-        resultPayload.value = {};
-        props.handleNextStep();
-      }
-    };
+const buttonTitle = ref('CHECK');
+const resultPayload = ref({});
+const store = useStore();
 
-    const handleResult = () => {
-      if (!store.state.hasResult) return;
-
-      const isCorrectAnswer = store.state.isCorrectAnswer;
-
-      if (isCorrectAnswer) {
-        resultPayload.value = {
-          icon: 'check',
-          title: 'Well done!',
-          textClass: 'text-green-700',
-          bgClass: 'bg-green-200',
-          variant: 'success',
-        };
-      } else {
-        resultPayload.value = {
-          icon: 'closeBorder',
-          title: 'Correct solution:',
-          textClass: 'text-red-700',
-          bgClass: 'bg-red-200',
-          description: store.state.correctAnswer,
-          variant: 'error',
-        };
-      }
-    };
-    watch(() => store.state.isCorrectAnswer, handleResult);
-
-    return {
-      buttonTitle,
-      handleCheckAnswer,
-      resultPayload,
-    };
-  },
+const handleCheckAnswer = () => {
+  if (!store.state.hasResult) {
+    store.commit('checkAnswer');
+    buttonTitle.value = 'CONTINUE';
+  } else {
+    resultPayload.value = {};
+    props.handleNextStep();
+  }
 };
+
+const handleResult = () => {
+  if (!store.state.hasResult) return;
+
+  const isCorrectAnswer = store.state.isCorrectAnswer;
+
+  if (isCorrectAnswer) {
+    resultPayload.value = {
+      icon: 'check',
+      title: 'Well done!',
+      textClass: 'text-green-700',
+      bgClass: 'bg-green-200',
+      variant: 'success',
+    };
+  } else {
+    resultPayload.value = {
+      icon: 'closeBorder',
+      title: 'Correct solution:',
+      textClass: 'text-red-700',
+      bgClass: 'bg-red-200',
+      description: store.state.correctAnswer,
+      variant: 'error',
+    };
+  }
+};
+watch(() => store.state.isCorrectAnswer, handleResult);
 </script>

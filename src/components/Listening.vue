@@ -25,57 +25,45 @@
     <Words :words="words" :sentence="sentence" />
   </div>
 </template>
-<script>
+
+<script setup>
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
 
-import Icon from '@/components/Icon.vue';
-import Words from '@/components/Words.vue';
 import { handleTriggerVoice } from '@/utils/triggerSpeech';
 
-export default {
-  name: 'Listening',
-  components: {
-    Icon,
-    Words,
-  },
-  props: {
-    words: {
-      type: Array,
-      default: () => [],
-    },
-    title: {
-      type: String,
-      default: '',
-    },
-    images: {
-      type: Array,
-      default: () => [],
-    },
-    sentence: {
-      type: Object,
-      default: () => {},
-    },
-    answer: {
-      type: String,
-      default: '',
-    },
-  },
-  setup(props) {
-    const store = useStore();
+import Words from '@/components/Words.vue';
 
-    onMounted(() => {
-      handleTriggerVoice(props.sentence);
-
-      const setCurrentAnswer = () => {
-        store.commit('updateCorrectAnswer', props.answer);
-      };
-      setCurrentAnswer();
-    });
-
-    return {
-      handleTriggerVoice,
-    };
+const store = useStore();
+const props = defineProps({
+  words: {
+    type: Array,
+    default: () => [],
   },
-};
+  title: {
+    type: String,
+    default: '',
+  },
+  images: {
+    type: Array,
+    default: () => [],
+  },
+  sentence: {
+    type: Object,
+    default: () => {},
+  },
+  answer: {
+    type: String,
+    default: '',
+  },
+});
+
+onMounted(() => {
+  handleTriggerVoice(props.sentence);
+
+  const setCurrentAnswer = () => {
+    store.commit('updateCorrectAnswer', props.answer);
+  };
+  setCurrentAnswer();
+});
 </script>

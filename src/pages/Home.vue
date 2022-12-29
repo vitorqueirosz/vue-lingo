@@ -27,42 +27,30 @@
   </div>
 </template>
 
-<script>
-import { PATHS } from '@/constants/path';
+<script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ButtonC from '../components/ButtonC.vue';
-import Card from '../components/Card.vue';
 
-export default {
-  components: {
-    ButtonC,
-    Card,
-  },
-  setup() {
-    const language = ref('');
-    const router = useRouter();
+import ButtonC from '@/components/ButtonC.vue';
+import Card from '@/components/Card.vue';
 
-    const onSelectLanguage = (value) => {
-      language.value = value;
-    };
+import { PATHS } from '@/constants/path';
 
-    const onSelectLevel = (value) => {
-      const urlParams = new URLSearchParams({
-        lang: language.value,
-        level: value,
-      });
-      const route = `${PATHS.LESSONS}?` + urlParams;
-      router.push(route);
-    };
+const language = ref('');
+const router = useRouter();
 
-    return {
-      language,
-      onSelectLanguage,
-      onSelectLevel,
-    };
-  },
+const onSelectLanguage = (value) => {
+  language.value = value;
+};
+
+const onSelectLevel = (value) => {
+  const urlParams = new URLSearchParams({
+    lang: language.value,
+    level: value,
+  });
+  const route = `${PATHS.LESSONS}?` + urlParams;
+  router.push(route);
 };
 </script>
 
-<style scoped></style>
+<style></style>

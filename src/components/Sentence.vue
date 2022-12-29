@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
 
@@ -27,49 +27,36 @@ import { handleTriggerVoice } from '@/utils/triggerSpeech';
 import Icon from '@/components/Icon.vue';
 import Words from '@/components/Words.vue';
 
-export default {
-  name: 'Sentence',
-  components: {
-    Icon,
-    Words,
+const store = useStore();
+const props = defineProps({
+  title: {
+    type: String,
+    default: '',
   },
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    image: {
-      type: Object,
-      default: () => {},
-    },
-    words: {
-      type: Array,
-      default: () => [],
-    },
-    answer: {
-      type: String,
-      default: '',
-    },
-    sentence: {
-      type: Object,
-      default: () => {},
-    },
+  image: {
+    type: Object,
+    default: () => {},
   },
-  setup(props) {
-    const store = useStore();
-
-    onMounted(() => {
-      handleTriggerVoice(props.sentence);
-
-      const setCurrentAnswer = () => {
-        store.commit('updateCorrectAnswer', props.answer);
-      };
-      setCurrentAnswer();
-    });
-
-    return {
-      handleTriggerVoice,
-    };
+  words: {
+    type: Array,
+    default: () => [],
   },
-};
+  answer: {
+    type: String,
+    default: '',
+  },
+  sentence: {
+    type: Object,
+    default: () => {},
+  },
+});
+
+onMounted(() => {
+  handleTriggerVoice(props.sentence);
+
+  const setCurrentAnswer = () => {
+    store.commit('updateCorrectAnswer', props.answer);
+  };
+  setCurrentAnswer();
+});
 </script>

@@ -12,14 +12,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Card',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    default: '',
   },
-};
+});
 </script>

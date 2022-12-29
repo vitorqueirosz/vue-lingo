@@ -32,50 +32,39 @@
   </div>
 </template>
 
-<script>
-import Icon from '@/components/Icon.vue';
-import { clsx } from '@/utils/class';
-import { ref } from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
-export default {
-  name: 'ImageC',
-  components: {
-    Icon,
-  },
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    images: {
-      type: Array,
-      default: () => [],
-    },
-    answer: {
-      type: String,
-      default: '',
-    },
-  },
-  setup(props) {
-    const selectedCard = ref('');
-    const store = useStore();
+import { clsx } from '@/utils/class';
 
-    const setCurrentAnswer = () => {
-      store.commit('updateCorrectAnswer', props.answer);
-    };
-    setCurrentAnswer();
-
-    const handleSelectCard = (value) => {
-      selectedCard.value = value;
-      store.commit('updateCurrentAnswer', selectedCard.value);
-    };
-
-    return {
-      selectedCard,
-      handleSelectCard,
-      clsx,
-    };
+const props = defineProps({
+  title: {
+    type: String,
+    default: '',
   },
+  images: {
+    type: Array,
+    default: () => [],
+  },
+  answer: {
+    type: String,
+    default: '',
+  },
+});
+
+const selectedCard = ref('');
+const store = useStore();
+
+const handleSelectCard = (value) => {
+  selectedCard.value = value;
+  store.commit('updateCurrentAnswer', selectedCard.value);
 };
+
+onMounted(() => {
+  const setCurrentAnswer = () => {
+    store.commit('updateCorrectAnswer', props.answer);
+  };
+  setCurrentAnswer();
+});
 </script>
