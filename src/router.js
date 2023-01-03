@@ -11,8 +11,8 @@ export default createRouter({
       component: Home,
     },
     {
-        path: PATHS.LESSONS,
-        component: Lessons,
-      }
-  ]
-})
+      path: PATHS.LESSONS,
+      component: Lessons,
+    },
+  ],
+});

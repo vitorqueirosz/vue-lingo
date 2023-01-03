@@ -21,7 +21,7 @@
       <component :is="currentComponent" v-bind="currentLesson" />
     </div>
 
-    <FooterC :handle-next-step="handleNextStep" />
+    <FooterC v-if="step <= 3" :handle-next-step="handleNextStep" />
   </div>
 </template>
 
@@ -34,6 +34,8 @@ import Listening from '@/components/Listening.vue';
 import ImageC from '@/components/ImageC.vue';
 import Sentence from '@/components/Sentence.vue';
 import MatchWords from '@/components/MatchWords.vue';
+import Result from '@/components/Result.vue';
+
 import Icon from '@/components/Icon.vue';
 import FooterC from '@/components/FooterC.vue';
 
@@ -45,6 +47,7 @@ const components = {
   image: ImageC,
   sentence: Sentence,
   matchWords: MatchWords,
+  result: Result,
 };
 
 const step = ref(0);
@@ -66,11 +69,6 @@ const handleRedirectToHome = () => {
   router.push(PATHS.HOME);
 };
 
-const handleSetNextStep = () => {
-  currentLesson.value = newSteps.value[step.value];
-  currentComponent.value = components[currentLesson.value.type];
-};
-
 const handleNextStep = () => {
   step.value = step.value + 1;
   progress.value = (step.value / lessonsSteps.length) * 100;
@@ -78,6 +76,11 @@ const handleNextStep = () => {
 };
 
 onMounted(() => {
+  const handleSetNextStep = () => {
+    currentLesson.value = newSteps.value[step.value];
+    currentComponent.value = components[currentLesson.value.type];
+  };
+
   const randomNumbers = () => {
     const numbers = new Set();
     const maxNumber = lessonsSteps.length - 1;
@@ -98,6 +101,7 @@ onMounted(() => {
     numbers.forEach((number, index) => {
       randomSteps[number] = lessonsSteps[index];
     });
+    randomSteps[lessonsSteps.length] = { type: 'result' };
 
     newSteps.value = randomSteps;
     handleSetNextStep();
