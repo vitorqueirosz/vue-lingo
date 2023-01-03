@@ -25,8 +25,7 @@
         >
           <span
             class="border-2 flex items-center justify-center rounded-lg w-8 h-8"
-            >{{ index + 1 }}</span
-          >
+          >{{ index + 1 }}</span>
           <p class="flex-1 font-bold">
             {{ word.value }}
           </p>

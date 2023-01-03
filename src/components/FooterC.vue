@@ -2,7 +2,7 @@
   <footer
     :class="
       `flex items-center border-t-2 border-neutral-200 h-36 w-full m-auto ` +
-      resultPayload.bgClass
+        resultPayload.bgClass
     "
   >
     <div
