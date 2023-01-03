@@ -15,7 +15,7 @@
           v-for="(word, index) in item.values"
           :key="colIndex + word.value"
           type="button"
-          class="border-2 border-b-4 border-zinc-300 rounded-xl w-60 bg-white h-14 flex items-center p-4 mb-2 transition-all duration-300 ease-in"
+          class="border-2 border-b-4 border-zinc-300 rounded-xl w-60 bg-white h-14 flex items-center p-4 mb-2 transition-all duration-300 ease-in opacity-0 cards"
           @click="
             handleSelectWord(colIndex, index, {
               ...word,
@@ -25,7 +25,8 @@
         >
           <span
             class="border-2 flex items-center justify-center rounded-lg w-8 h-8"
-          >{{ index + 1 }}</span>
+            >{{ index + 1 }}</span
+          >
           <p class="flex-1 font-bold">
             {{ word.value }}
           </p>
@@ -149,3 +150,45 @@ onMounted(() => {
 
 watch(() => selectedWords.value.length, handleCheckAnswer);
 </script>
+
+<style scoped>
+@keyframes fadeIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  66% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+.cards {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+}
+
+.cards:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.cards:nth-child(2) {
+  animation-delay: 0.35s;
+}
+
+.cards:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.cards:nth-child(4) {
+  animation-delay: 0.65s;
+}
+
+.cards:nth-child(5) {
+  animation-delay: 0.8s;
+}
+</style>

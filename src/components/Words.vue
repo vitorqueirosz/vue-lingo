@@ -8,7 +8,7 @@
       v-for="(item, index) in words"
       :key="index + 'word-image'"
       ref="wordsRef"
-      class="relative border-2 z-10 bg-white border-b-4 border-zinc-300 rounded-xl transition-transform ease-in-out duration-300 h-16 p-4 mr-1"
+      class="relative border-2 z-10 bg-white border-b-4 border-zinc-300 rounded-xl transition-transform ease-in-out duration-300 h-16 p-4 mr-1 opacity-0 cards"
       :disabled="$store.state.hasResult"
       @click="handleSelectWord(index, item)"
     >
@@ -96,3 +96,52 @@ const handleSelectWord = (index, item) => {
   handleNewPosition(index);
 };
 </script>
+
+<style scoped>
+@keyframes fadeIn {
+  0% {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  66% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+.cards {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+}
+
+.cards:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.cards:nth-child(2) {
+  animation-delay: 0.35s;
+}
+
+.cards:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.cards:nth-child(4) {
+  animation-delay: 0.65s;
+}
+
+.cards:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+.cards:nth-child(6) {
+  animation-delay: 0.95s;
+}
+
+.cards:nth-child(7) {
+  animation-delay: 1.1s;
+}
+</style>
