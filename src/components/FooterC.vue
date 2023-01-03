@@ -24,7 +24,7 @@
         v-else
         variant="secondary"
         :disabled="$store.state.hasResult"
-        @click="handleNextStep"
+        @click="handleSkip"
       >
         SKIP
       </ButtonC>
@@ -64,6 +64,11 @@ const handleCheckAnswer = () => {
     resultPayload.value = {};
     props.handleNextStep();
   }
+};
+
+const handleSkip = () => {
+  store.commit('updateAnswersAmount', 'skipped');
+  props.handleNextStep();
 };
 
 const handleResult = () => {

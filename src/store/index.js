@@ -1,5 +1,11 @@
 import { createStore } from 'vuex';
 
+const answersAmountDefaultValue = {
+  correct: 0,
+  wrong: 0,
+  skipped: 0,
+};
+
 export default createStore({
   state: {
     currentStep: '',
@@ -7,10 +13,7 @@ export default createStore({
     correctAnswer: '',
     isCorrectAnswer: null,
     hasResult: false,
-    answersAmount: {
-      correct: 0,
-      wrong: 0,
-    },
+    answersAmount: answersAmountDefaultValue,
   },
   getters: {},
   mutations: {
@@ -21,14 +24,27 @@ export default createStore({
       state.currentAnswer = value;
     },
     checkAnswer(state) {
-      state.isCorrectAnswer =
+      const isRightAnswer =
         state.correctAnswer.toLowerCase() === state.currentAnswer.toLowerCase();
+      state.isCorrectAnswer = isRightAnswer;
       state.hasResult = true;
+
+      const key = isRightAnswer ? 'correct' : 'wrong';
+      this.commit('updateAnswersAmount', key);
     },
     resetCurrentPayload(state) {
       state.isCorrectAnswer = null;
       state.hasResult = false;
       state.currentAnswer = '';
+    },
+    updateAnswersAmount(state, key) {
+      state.answersAmount = {
+        ...state.answersAmount,
+        [key]: state.answersAmount[key] + 1,
+      };
+    },
+    resetAnswersAmount(state) {
+      state.answersAmount = answersAmountDefaultValue;
     },
   },
   actions: {},
