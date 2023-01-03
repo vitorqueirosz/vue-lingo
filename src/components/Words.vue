@@ -8,7 +8,7 @@
       v-for="(item, index) in words"
       :key="index + 'word-image'"
       ref="wordsRef"
-      class="relative border-2 z-10 bg-white border-b-4 border-neutral-200 rounded-xl transition-transform ease-in-out duration-300 h-16 p-4 mr-1"
+      class="relative border-2 z-10 bg-white border-b-4 border-zinc-300 rounded-xl transition-transform ease-in-out duration-300 h-16 p-4 mr-1"
       :disabled="$store.state.hasResult"
       @click="handleSelectWord(index, item)"
     >

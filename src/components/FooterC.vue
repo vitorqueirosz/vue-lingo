@@ -2,7 +2,7 @@
   <footer
     :class="
       `flex items-center border-t-2 border-neutral-200 h-36 w-full m-auto ` +
-        resultPayload.bgClass
+      resultPayload.bgClass
     "
   >
     <div
@@ -60,7 +60,6 @@ const store = useStore();
 const handleCheckAnswer = () => {
   if (!store.state.hasResult) {
     store.commit('checkAnswer');
-    buttonTitle.value = 'CONTINUE';
   } else {
     resultPayload.value = {};
     props.handleNextStep();
@@ -92,4 +91,11 @@ const handleResult = () => {
   }
 };
 watch(() => store.state.isCorrectAnswer, handleResult);
+
+const handleSetButtonTitle = () => {
+  if (store.state.hasResult) buttonTitle.value = 'CONTINUE';
+
+  return buttonTitle.value;
+};
+watch(() => store.state.hasResult, handleSetButtonTitle);
 </script>
